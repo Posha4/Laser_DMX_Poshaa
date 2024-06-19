@@ -2,60 +2,57 @@
 
 <head>
 	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script src="/script.js"></script>
 </head>
 
 <body>
-	Laser Control:<br />
-	<br />
-	<link href="http://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet" type="text/css" />
-	<form>
-		Starting address:
-		<input id="addr" type="number" value="1" placeholder="1" min="0" max="512" step="1"
-			onchange="prepareVar('addr',0);;" /><br />
-		mode:
-		<input id="chan1" type="range" value="0" min="0" max="255" step="1" onchange="prepareVar('chan1',1);"
-			oninput="this.form.chan1_in.value=this.value" /><input id="chan1_in" type="number" min="0" max="255"
-			step="1" onchange="prepareVar('chan1',1);" value="0" oninput="this.form.chan1.value=this.value" /><br />
-		figs:
-		<input id="chan2" type="range" value="0" min="0" max="255" step="1" onchange="prepareVar('chan2',2);"
-			oninput="this.form.chan2_in.value=this.value" /><input id="chan2_in" type="number" min="0" max="255"
-			step="1" onchange="prepareVar('chan2',2);" value="0" oninput="this.form.chan2.value=this.value" /><br />
-		zoom:
-		<input id="chan3" type="range" value="0" min="0" max="255" step="1" onchange="prepareVar('chan3',3);"
-			oninput="this.form.chan3_in.value=this.value" /><input id="chan3_in" type="number" min="0" max="255"
-			step="1" onchange="prepareVar('chan3',3);" value="0" oninput="this.form.chan3.value=this.value" /><br />
-		Xond:
-		<input id="chan4" type="range" value="0" min="0" max="255" step="1" onchange="prepareVar('chan4',4);"
-			oninput="this.form.chan4_in.value=this.value" /><input id="chan4_in" type="number" min="0" max="255"
-			step="1" onchange="prepareVar('chan4',4);" value="0" oninput="this.form.chan4.value=this.value" /><br />
-		Yond:
-		<input id="chan5" type="range" value="0" min="0" max="255" step="1" onchange="prepareVar('chan5',5);"
-			oninput="this.form.chan5_in.value=this.value" /><input id="chan5_in" type="number" min="0" max="255"
-			step="1" onchange="prepareVar('chan5',5);" value="0" oninput="this.form.chan5.value=this.value" /><br />
-		Zond:
-		<input id="chan6" type="range" value="0" min="0" max="255" step="1" onchange="prepareVar('chan6',6);"
-			oninput="this.form.chan6_in.value=this.value" /><input id="chan6_in" type="number" min="0" max="255"
-			step="1" onchange="prepareVar('chan6',6);" value="0" oninput="this.form.chan6.value=this.value" /><br />
-		Xmov:
-		<input id="chan7" type="range" value="0" min="0" max="255" step="1" onchange="prepareVar('chan7',7);"
-			oninput="this.form.chan7_in.value=this.value" /><input id="chan7_in" type="number" min="0" max="255"
-			step="1" onchange="prepareVar('chan7',7);" value="0" oninput="this.form.chan7.value=this.value" /><br />
-		Ymov:
-		<input id="chan8" type="range" value="0" min="0" max="255" step="1" onchange="prepareVar('chan8',8);"
-			oninput="this.form.chan8_in.value=this.value" /><input id="chan8_in" type="number" min="0" max="255"
-			step="1" onchange="prepareVar('chan8',8);" value="0" oninput="this.form.chan8.value=this.value" /><br />
-		colo:
-		<input id="chan9" type="range" value="0" min="0" max="255" step="1" onchange="prepareVar('chan9',9);"
-			oninput="this.form.chan9_in.value=this.value" /><input id="chan9_in" type="number" min="0" max="255"
-			step="1" onchange="prepareVar('chan9',9);" value="0" oninput="this.form.chan9.value=this.value" /><br />
-		<li class="tg-list-item">
-			<h4>Blackout</h4>
-			<input class="tgl tgl-skewed" id="cb3" type="checkbox" />
-			<label class="tgl-btn" data-tg-off="OFF" data-tg-on="ON" onclick="blackoutToggle()"></label>
-		</li>
-	</form>
 
-	<script src="/script.js"></script>
+	<template id="slider-template">
+        <div class="slider-input-container">
+			<span class="slider-name"></span>
+			<input orient="vertical" type="range" value="0" min="0" max="255" step="1" />
+			<input type="number" min="0" max="255" step="1" value="0" />
+		</div>
+    </template>
+
+	<h2 class="title">Laser DMX Controller</h2>
+	
+	<link href="http://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet" type="text/css" />
+
+	<div>
+		<form>
+			<div style="display: none;">
+				Starting address:
+				<input id="addr" type="number" value="1" placeholder="1" min="0" max="512" step="1"
+					onchange="prepareVar('addr',0);;" /><br />
+			</div>
+
+			<div class="dmx-container">
+				<div id="slider-container">
+				
+				</div>
+
+				<div>
+					<div>
+						<label for="auto-apply-checkbox" class="textbox-label">Auto apply</label>
+						<input id="auto-apply-checkbox" name="auto-apply-checkbox" type="checkbox">
+					</div>
+					<button type="button" onclick="savePreset()">Save Preset</button>
+					<button type="button" onclick="sendData()">Apply</button>
+				</div>
+			</div>
+			
+			
+
+		</form>
+	</div>
+
+	<div>
+
+	</div>
+
+	<script src="/slider-generator.js"></script>
+	
 </body>
 
 </html>

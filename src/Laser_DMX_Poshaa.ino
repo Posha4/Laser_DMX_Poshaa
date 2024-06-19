@@ -141,6 +141,9 @@ void setup()
     server.on("/script.js", HTTP_GET, [](AsyncWebServerRequest *request)
               { request->send(SPIFFS, "/script.js", "text/javascript"); });
 
+    server.on("/slider-generator.js", HTTP_GET, [](AsyncWebServerRequest *request)
+              { request->send(SPIFFS, "/slider-generator.js", "text/javascript"); });
+
     server.begin();
     MDNS.addService("http", "tcp", 80);
     MDNS.addService("ws", "tcp", 81);

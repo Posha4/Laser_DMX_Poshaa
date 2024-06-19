@@ -12,7 +12,15 @@ connection.onmessage = function (e) {
 id_array = new Array("addr", "chan1", "chan2", "chan3", "chan4", "chan5", "chan6", "chan7", "chan8", "chan9");
 values = new Array(id_array.length);
 
-function prepareVar(id, position) {
+function onSliderChange(id, position) {
+    if(position > 0)
+        slidersData[position - 1].value = document.getElementById(id_array[position]).value
+
+    if(document.getElementById('auto-apply-checkbox').checked)
+        sendData()
+}
+
+function sendData(){
     for (i = 0; i < id_array.length; i++) {
         var a = parseInt(document.getElementById(id_array[i]).value).toString(16);
         if (a.length < 2) {
@@ -23,26 +31,64 @@ function prepareVar(id, position) {
     sendVars();
 }
 
-function blackoutToogle() {
-    var action = document.querySelector(".tgl-btn");
-    action.classList.toggle("active");
-
-    if (action.classList.contains("active")) {
-        var data = '#01,00,00,00,00,00,00,00,00,00';
-        console.log('Data: ' + data);
-        connection.send(data);
-        console.log("Blackout");
-    } else {
-        // annyang.abort();
-        button.value = "OFF";
-        prepareVar('chan1', 1);
-        console.log("Stopped");
-    }
-}
-
-
-function sendVars() {
+function sendVars(id) {
     var data = '#' + values;
     console.log('Data: ' + data);
     connection.send(data);
+}
+
+var slidersData = [
+    {
+        id: 'chan1',
+        value: 0,
+        name : 'Mode'
+    },
+    {
+        id: 'chan2',
+        value: 0,
+        name: 'Figs'
+    },
+    {
+        id: 'chan3',
+        value: 0,
+        name: 'Zoom'
+    },
+    {
+        id: 'chan4',
+        value: 0,
+        name: 'Xond'
+    },
+    {
+        id: 'chan5',
+        value: 0,
+        name: 'Yond'
+    },
+    {
+        id: 'chan6',
+        value: 0,
+        name: 'Zond'
+    },
+    {
+        id: 'chan7',
+        value: 0,
+        name: 'Xmov'
+    },
+    {
+        id: 'chan8',
+        value: 0,
+        name: 'Ymov'
+    },
+    {
+        id: 'chan9',
+        value: 0,
+        name: 'Color'
+    }
+];
+
+function savePreset(){
+    var preset = [];
+    for(var i = 0; i < slidersData.length; i++){
+        preset.push(slidersData[i].value);
+    }
+    console.log('Preset: ' + preset);
 }
