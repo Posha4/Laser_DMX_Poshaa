@@ -5,6 +5,12 @@ body {
   background-color: #f6f4ef;
 }
 
+.config-container {
+  margin: 24px 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .title {
   margin: 32px 0;
   font-size: 24px;

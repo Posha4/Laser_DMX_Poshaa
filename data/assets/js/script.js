@@ -1,13 +1,27 @@
+var connection;
 
-var connection = new WebSocket('ws://' + location.hostname + ':81/', ['arduino']);
-connection.onopen = function () {
-    connection.send('Connect ' + new Date());
-};
-connection.onerror = function (error) {
-    console.log('WebSocket Error ', error);
-};
-connection.onmessage = function (e) {
-    console.log('Server: ', e.data);
+window.onload = function() {
+    connection = new WebSocket('ws://' + location.hostname + ':81/', ['arduino']);
+    connection.onopen = function () {
+        connection.send('Connect ' + new Date());
+    };
+    connection.onerror = function (error) {
+        console.log('WebSocket Error ', error);
+    };
+    connection.onmessage = function (e) {
+        console.log('Server: ', e.data);
+
+        const id = e.data.substring(0, 1);
+        const value = e.data.substring(1, e.data.length);
+
+        switch (id) {
+            case '?':
+                initPads(value);
+                break;
+            default:
+                console.log('Invalid data');
+        }
+    };
 };
 
 function makeid(length) {

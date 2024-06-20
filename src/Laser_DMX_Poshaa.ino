@@ -52,49 +52,104 @@ ESP8266WiFiMulti WiFiMulti;
 AsyncWebServer server(80);
 WebSocketsServer webSocket = WebSocketsServer(81);
 
-void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lenght)
+void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t length)
 {
-    switch (type)
-    {
-    case WStype_DISCONNECTED:
-        Serial.println("Disconnected!");
-        break;
-    case WStype_CONNECTED:
-        Serial.println("Client connected!");
-        // send message to client
-        webSocket.sendTXT(num, "Connected");
-        break;
-    case WStype_TEXT:
-        // # is the start for this data
-        if (payload[0] == '#')
-        {
-            // data received is comma separated, thats why we do pEnd+1 to start next value
-            char *pEnd;
-            uint32_t address = strtol((const char *)&payload[1], &pEnd, 16);
-            uint32_t chan1 = strtol((const char *)pEnd + 1, &pEnd, 16);
-            uint32_t chan2 = strtol((const char *)pEnd + 1, &pEnd, 16);
-            uint32_t chan3 = strtol((const char *)pEnd + 1, &pEnd, 16);
-            uint32_t chan4 = strtol((const char *)pEnd + 1, &pEnd, 16);
-            uint32_t chan5 = strtol((const char *)pEnd + 1, &pEnd, 16);
-            uint32_t chan6 = strtol((const char *)pEnd + 1, &pEnd, 16);
-            uint32_t chan7 = strtol((const char *)pEnd + 1, &pEnd, 16);
-            uint32_t chan8 = strtol((const char *)pEnd + 1, &pEnd, 16);
-            uint32_t chan9 = strtol((const char *)pEnd + 1, &pEnd, 16);
+    switch (type) {
 
-            // write to DMX bus
-            dmx.write(address, chan1);
-            dmx.write(address + 1, chan2);
-            dmx.write(address + 2, chan3);
-            dmx.write(address + 3, chan4);
-            dmx.write(address + 4, chan5);
-            dmx.write(address + 5, chan6);
-            dmx.write(address + 6, chan7);
-            dmx.write(address + 7, chan8);
-            dmx.write(address + 8, chan9);
-            dmx.update();
+        case WStype_DISCONNECTED:
+            Serial.println("Disconnected!");
+            break;
+        case WStype_CONNECTED:
+            Serial.println("Client connected!");
+            // send message to client
+            webSocket.sendTXT(num, "Connected");
+            sendConfig(num);
+            
+            break;
+        case WStype_TEXT:
+        {
+            // # is the start for this data
+            if (payload[0] == '#')
+            {
+                // data received is comma separated, thats why we do pEnd+1 to start next value
+                char *pEnd;
+                uint32_t address = strtol((const char *)&payload[1], &pEnd, 16);
+                uint32_t chan1 = strtol((const char *)pEnd + 1, &pEnd, 16);
+                uint32_t chan2 = strtol((const char *)pEnd + 1, &pEnd, 16);
+                uint32_t chan3 = strtol((const char *)pEnd + 1, &pEnd, 16);
+                uint32_t chan4 = strtol((const char *)pEnd + 1, &pEnd, 16);
+                uint32_t chan5 = strtol((const char *)pEnd + 1, &pEnd, 16);
+                uint32_t chan6 = strtol((const char *)pEnd + 1, &pEnd, 16);
+                uint32_t chan7 = strtol((const char *)pEnd + 1, &pEnd, 16);
+                uint32_t chan8 = strtol((const char *)pEnd + 1, &pEnd, 16);
+                uint32_t chan9 = strtol((const char *)pEnd + 1, &pEnd, 16);
+
+                // write to DMX bus
+                dmx.write(address, chan1);
+                dmx.write(address + 1, chan2);
+                dmx.write(address + 2, chan3);
+                dmx.write(address + 3, chan4);
+                dmx.write(address + 4, chan5);
+                dmx.write(address + 5, chan6);
+                dmx.write(address + 6, chan7);
+                dmx.write(address + 7, chan8);
+                dmx.write(address + 8, chan9);
+                dmx.update();
+            }
+
+            if (payload[0] == '!'){
+
+                int jsonLength = length-1;
+
+                Serial.println("====== Writing to SPIFFS file =========");
+
+                char json[jsonLength];
+                for (int i = 0; i < jsonLength; i++){
+                    json[i] = payload[i+1];
+                    Serial.print(json[i]);
+                }
+
+                json[jsonLength] = 0;
+
+                Serial.println("");
+
+                File f = SPIFFS.open("/data.json", "w");
+                if (!f) {
+                    Serial.println("file open failed");
+                }
+                
+                f.println(json);
+                f.close();
+            }
+
+            if (payload[0] == '?'){
+
+               sendConfig(num);
+                
+            }
+            break;
         }
-        break;
+       
     }
+}
+
+void sendConfig(uint8_t num){
+    File f = SPIFFS.open("/data.json", "r");
+
+    if (!f) {
+        Serial.println("file open failed");
+    }
+
+    Serial.println("====== Reading from SPIFFS file =========");
+
+    String json = f.readString();
+    Serial.print("?");
+    Serial.println(json);
+
+    f.close();
+
+    String resp =  String("?" + json);
+    webSocket.sendTXT(num, resp);
 }
 
 void setup()

@@ -14,13 +14,15 @@ function savePreset(){
 }
 
 function createPad(preset){
-
     const id = makeid(20);
+    _createPad(id, preset, colors[Math.floor(Math.random() * colors.length)]);
+}
 
+function _createPad(id, values, color){
     var pad = {
         id: id,
-        values: preset,
-        color: colors[Math.floor(Math.random() * colors.length)]
+        values: values,
+        color: color
     };
 
     pads.push(pad);
@@ -29,13 +31,14 @@ function createPad(preset){
 
     clone.querySelector('.pad').setAttribute('id', id);
 
-    clone.querySelector('.pad-body').style.backgroundColor = pad.color;
+    clone.querySelector('.pad-body').style.backgroundColor = color;
     clone.querySelector('.pad-body').setAttribute('onclick', `onPadClick('${id}')`);
 
     clone.querySelector("button[name='deletePreset']").setAttribute('onclick', `deletePreset('${id}')`);
     clone.querySelector("button[name='changeColorPreset']").setAttribute('onclick', `changeColorPreset('${id}')`);
 
     padContainer.appendChild(clone);
+
 }
 
 function onPadClick(id){
@@ -62,4 +65,19 @@ function changeColorPreset(id){
     const pad = pads.find(pad => pad.id === id);
     pad.color = colors[Math.floor(Math.random() * colors.length)];
     document.getElementById(id).querySelector('.pad-body').style.backgroundColor = pad.color;
+}
+
+function initPads(json){
+    if(json === ''){
+        return;
+    }
+
+    pads = [];
+    padContainer.innerHTML = '';
+
+    const jsonParsed = JSON.parse(json);
+    jsonParsed.forEach(pad => {
+        _createPad(pad.id, pad.values, pad.color);
+    });
+    
 }
