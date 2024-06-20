@@ -3,6 +3,7 @@ var connection;
 window.onload = function() {
     connection = new WebSocket('ws://' + location.hostname + ':81/', ['arduino']);
     connection.onopen = function () {
+        document.getElementById('ws-status').style = 'background-color: green;';
         connection.send('Connect ' + new Date());
     };
     connection.onerror = function (error) {
@@ -15,12 +16,18 @@ window.onload = function() {
         const value = e.data.substring(1, e.data.length);
 
         switch (id) {
+            case '!':
+                break;
             case '?':
                 initPads(value);
                 break;
             default:
                 console.log('Invalid data');
         }
+    };
+    connection.onclose = function () {
+        console.log('WebSocket connection closed');
+        document.getElementById('ws-status').style = 'background-color: red;';
     };
 };
 

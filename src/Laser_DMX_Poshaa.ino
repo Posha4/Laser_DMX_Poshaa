@@ -62,7 +62,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t length)
         case WStype_CONNECTED:
             Serial.println("Client connected!");
             // send message to client
-            webSocket.sendTXT(num, "Connected");
+            webSocket.sendTXT(num, "!Connected");
             sendConfig(num);
 
             break;

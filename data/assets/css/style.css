@@ -13,6 +13,16 @@ body {
   font-size: 24px;
 }
 
+#ws-status {
+  background-color: red;
+  display: inline-block;
+  height: 12px;
+  width: 12px;
+  border-radius: 100%;
+  margin-left: 8px;
+  margin-bottom: 2px;
+}
+
 .navigation {
   display: flex;
   justify-content: space-evenly;
