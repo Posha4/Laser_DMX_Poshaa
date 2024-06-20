@@ -36,6 +36,7 @@ body {
 
 .navigation button:hover {
   color: darkorange;
+  background: none;
 }
 
 #pads-container, #storage-container {
@@ -46,7 +47,7 @@ body {
   display: flex;
   align-items: center;
   flex-grow: 1;
-  padding: 16px 0;
+  padding: 16px 24px;
 }
 
 input[type=range][orient=vertical] {
@@ -85,7 +86,7 @@ input[type=range][orient=vertical] {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-top: 4px;
+  margin-top: 12px;
 }
 
 .slider-radio-wrapper {
@@ -127,13 +128,31 @@ input[type=range][orient=vertical] {
 }
 
 .pad .pad-actions {
-  margin-top: 4px;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .pad button {
-  padding: 4px;
+  padding: 12px;
 }
 
 .pad-name {
   font-weight: bold;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: orange;
+  color: white;
+  transition: all 100ms ease-out;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 16px;
+}
+
+button:hover {
+  background: darkorange;
 }

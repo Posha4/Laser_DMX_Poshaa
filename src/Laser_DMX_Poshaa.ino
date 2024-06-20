@@ -103,22 +103,21 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t length)
 
                 Serial.println("====== Writing to SPIFFS file =========");
 
-                char json[jsonLength];
+                File f = SPIFFS.open("/data.json", "w");
+                if (!f) {
+                    Serial.println("file open failed");
+                    return;
+                }
+
+                char json[jsonLength-1];
                 for (int i = 0; i < jsonLength; i++){
                     json[i] = payload[i+1];
                     Serial.print(json[i]);
                 }
 
-                json[jsonLength] = 0;
+                f.write(json, jsonLength);
 
                 Serial.println("");
-
-                File f = SPIFFS.open("/data.json", "w");
-                if (!f) {
-                    Serial.println("file open failed");
-                }
-                
-                f.println(json);
                 f.close();
 
                 for (uint8_t i = 0; i < webSocket.connectedClients(); i++) {
@@ -147,6 +146,8 @@ void sendConfig(uint8_t num){
     String json = f.readString();
     Serial.print("?");
     Serial.println(json);
+
+    
 
     f.close();
 
