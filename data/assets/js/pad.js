@@ -14,6 +14,12 @@ function savePreset(){
 }
 
 function createPad(preset){
+
+    if(pads.length >= 24){
+        alert('Max number of presets reached (24).');
+        return;
+    }
+
     const id = makeid(20);
     _createPad(id, preset, colors[Math.floor(Math.random() * colors.length)]);
 }
