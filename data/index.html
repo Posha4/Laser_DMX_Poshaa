@@ -1,8 +1,10 @@
 <html>
 
 <head>
-	<link rel="stylesheet" type="text/css" href="style.css" />
-	<script src="/script.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+	<script src="/assets/js/script.js"></script>
+	<title>Laser DMX Controller</title>
 </head>
 
 <body>
@@ -12,6 +14,23 @@
 			<span class="slider-name"></span>
 			<input orient="vertical" type="range" value="0" min="0" max="255" step="1" />
 			<input type="number" min="0" max="255" step="1" value="0" />
+		</div>
+    </template>
+
+	<template id="pad-template">
+        <div class="pad">
+			<div class="pad-body">
+
+			</div>
+			<div class="pad-footer">
+				<button name="deletePreset" type="button">
+					<img src="/assets/img/delete.svg" width="16" height="16" alt="Delete" />
+				</button>
+
+				<button name="changeColorPreset" type="button">
+					<img src="/assets/img/palette.svg" width="16" height="16" alt="Change color" />
+				</button>
+			</div>
 		</div>
     </template>
 
@@ -38,7 +57,7 @@
 						<input id="auto-apply-checkbox" name="auto-apply-checkbox" type="checkbox">
 					</div>
 					<button type="button" onclick="savePreset()">Save Preset</button>
-					<button type="button" onclick="sendData()">Apply</button>
+					<button type="button" onclick="sendCurrentData()">Apply</button>
 				</div>
 			</div>
 			
@@ -47,11 +66,12 @@
 		</form>
 	</div>
 
-	<div>
+	<div id="pad-container">
 
 	</div>
 
-	<script src="/slider-generator.js"></script>
+	<script src="/assets/js/slider-generator.js"></script>
+	<script src="/assets/js/pad.js"></script>
 	
 </body>
 

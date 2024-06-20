@@ -130,19 +130,21 @@ void setup()
         Serial.println("MDNS responder started");
     }
 
-    server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
-              {
+    server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
         Serial.println("GET /");
-        request->send(SPIFFS, "/index.html", "text/html"); });
+        request->send(SPIFFS, "/index.html", "text/html"); 
+    });
 
-    server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request)
-              { request->send(SPIFFS, "/style.css", "text/css"); });
+    server.on("/assets/*", HTTP_GET, [](AsyncWebServerRequest *request){
+        String path = request->url();
+        Serial.println("Requested URL: " + path);
 
-    server.on("/script.js", HTTP_GET, [](AsyncWebServerRequest *request)
-              { request->send(SPIFFS, "/script.js", "text/javascript"); });
-
-    server.on("/slider-generator.js", HTTP_GET, [](AsyncWebServerRequest *request)
-              { request->send(SPIFFS, "/slider-generator.js", "text/javascript"); });
+        if(SPIFFS.exists(path)){
+            request->send(SPIFFS, path);
+        } else {
+            request->send(404, "text/plain", "File Not Found");
+        }
+    });
 
     server.begin();
     MDNS.addService("http", "tcp", 80);
