@@ -1,18 +1,52 @@
 body {
-  font-family: "Roboto Mono", sans-serif;
+  font-family: Verdana, sans-serif;
   text-align: center;
   background-color: #f6f4ef;
-}
-
-.config-container {
-  margin: 24px 0;
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
 }
 
 .title {
   margin: 32px 0;
   font-size: 24px;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 16px auto;
+  background: white;
+  border-radius: 8px;
+  padding: 12px;
+  width: 75%;
+}
+
+.navigation button {
+  text-decoration: none;
+  color: orange;
+  transition: all 100ms ease-out;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.navigation button:hover {
+  color: darkorange;
+}
+
+#pads-container, #storage-container {
+  display: none;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  padding: 16px 0;
 }
 
 input[type=range][orient=vertical] {
@@ -27,13 +61,12 @@ input[type=range][orient=vertical] {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 24px;
 }
 
 #slider-container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
 }
 
 .slider-input-container {
@@ -46,6 +79,17 @@ input[type=range][orient=vertical] {
 
 .slider-name {
   font-weight: bold;
+}
+
+.slider-radio-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.slider-radio-wrapper {
+  margin-right: 8px;
 }
 
 #pad-container {
@@ -82,6 +126,14 @@ input[type=range][orient=vertical] {
   padding: 4px 0;
 }
 
+.pad .pad-actions {
+  margin-top: 4px;
+}
+
 .pad button {
   padding: 4px;
+}
+
+.pad-name {
+  font-weight: bold;
 }

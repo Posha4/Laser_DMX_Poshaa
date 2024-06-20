@@ -24,6 +24,21 @@ window.onload = function() {
     };
 };
 
+function navigate(page){
+    switch(page){
+        case 'sliders':
+            document.getElementById('sliders-container').style.display = 'block';
+            document.getElementById('pads-container').style.display = 'none';
+            break;
+        case 'pads':
+            document.getElementById('sliders-container').style.display = 'none';
+            document.getElementById('pads-container').style.display = 'block';
+            break;
+        default:
+            console.log('Invalid page');
+    }
+}
+
 function makeid(length) {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -36,8 +51,8 @@ function makeid(length) {
     return result;
 }
 
-function onSliderChange(id) {
-    slidersData.find(slider => slider.id === id).value = document.getElementById(id).value;
+function onSliderChange(id, html_id) {
+    slidersData.find(slider => slider.id === id).value = document.getElementById(html_id ?? id).value;
 
     if(document.getElementById('auto-apply-checkbox').checked){
         sendData(slidersData)
@@ -71,60 +86,88 @@ var slidersData = [
         id: 'addr',
         value: 0,
         name: 'Address',
-        visible: false
+        visible: false,
+        type: 'range'
     },
     {
         id: 'chan1',
         value: 0,
         name : 'Mode',
-        visible: true
+        visible: true,
+        type: 'range'
     },
     {
         id: 'chan2',
         value: 0,
         name: 'Figs',
-        visible: true
+        visible: true,
+        type: 'range'
     },
     {
         id: 'chan3',
         value: 0,
         name: 'Zoom',
-        visible: true
+        visible: true,
+        type: 'range'
     },
     {
         id: 'chan4',
         value: 0,
         name: 'Xond',
-        visible: true
+        visible: true,
+        type: 'range'
     },
     {
         id: 'chan5',
         value: 0,
         name: 'Yond',
-        visible: true
+        visible: true,
+        type: 'range'
     },
     {
         id: 'chan6',
         value: 0,
         name: 'Zond',
-        visible: true
+        visible: true,
+        type: 'range'
     },
     {
         id: 'chan7',
         value: 0,
         name: 'Xmov',
-        visible: true
+        visible: true,
+        type: 'range'
     },
     {
         id: 'chan8',
         value: 0,
         name: 'Ymov',
-        visible: true
+        visible: true,
+        type: 'range'
     },
     {
         id: 'chan9',
         value: 0,
         name: 'Color',
-        visible: true
+        visible: true,
+        type: 'radio',
+        options : [
+            {
+                value: 0,
+                name: 'Red'
+            },
+            {
+                value: 1,
+                name: 'Green'
+            },
+            {
+                value: 2,
+                name: 'Blue'
+            },
+            {
+                value: 3,
+                name: 'White'
+            }
+        ]
     }
 ];

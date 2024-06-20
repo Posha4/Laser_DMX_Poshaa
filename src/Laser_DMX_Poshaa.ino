@@ -64,7 +64,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t length)
             // send message to client
             webSocket.sendTXT(num, "Connected");
             sendConfig(num);
-            
+
             break;
         case WStype_TEXT:
         {
@@ -120,12 +120,14 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t length)
                 
                 f.println(json);
                 f.close();
+
+                for (uint8_t i = 0; i < webSocket.connectedClients(); i++) {
+                   sendConfig(i);
+                }
             }
 
             if (payload[0] == '?'){
-
-               sendConfig(num);
-                
+               sendConfig(num);  
             }
             break;
         }

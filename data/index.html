@@ -3,6 +3,7 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
 	<link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="/assets/css/components.css" />
 	<script src="/assets/js/script.js"></script>
 	<title>Laser DMX Controller</title>
 </head>
@@ -12,8 +13,17 @@
 	<template id="slider-template">
         <div class="slider-input-container">
 			<span class="slider-name"></span>
-			<input orient="vertical" type="range" value="0" min="0" max="255" step="1" />
+			<div class="slidercontainer">
+				<input type="range" min="0" max="255" value="0" step="1" class="slider" orient="vertical">
+			</div>
 			<input type="number" min="0" max="255" step="1" value="0" />
+		</div>
+    </template>
+
+	<template id="radio-slider-template">
+        <div class="slider-input-container">
+			<span class="slider-name"></span>
+			<div class="slidercontainer"></div>
 		</div>
     </template>
 
@@ -23,39 +33,34 @@
 
 			</div>
 			<div class="pad-footer">
-				<button name="deletePreset" type="button">
-					<img src="/assets/img/delete.svg" width="16" height="16" alt="Delete" />
-				</button>
+				<span class="pad-name"></span>
 
-				<button name="changeColorPreset" type="button">
-					<img src="/assets/img/palette.svg" width="16" height="16" alt="Change color" />
-				</button>
+				<div class="pad-actions">
+					<button name="deletePreset" type="button">
+						<img src="/assets/img/delete.svg" width="16" height="16" alt="Delete" />
+					</button>
+	
+					<button name="changeColorPreset" type="button">
+						<img src="/assets/img/palette.svg" width="16" height="16" alt="Change color" />
+					</button>
+				</div>
+				
 			</div>
 		</div>
     </template>
 
 	<h2 class="title">Laser DMX Controller</h2>
-	
-	<link href="http://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet" type="text/css" />
 
-	<div class="config-container">
-		<button onclick="loadData()">Load data</button>
-		<button onclick="saveData()">Save data</button>
+	<div class="navigation">
+		<button onclick="navigate('sliders')">Sliders</button>
+		<button onclick="navigate('pads')" href="/pads.html">Pads</button>
+		<button onclick="navigate('storage')" href="#">Storage</button>
 	</div>
 
-	<div>
-		<form>
-			<div style="display: none;">
-				Starting address:
-				<input id="addr" type="number" value="1" placeholder="1" min="0" max="512" step="1"
-					onchange="prepareVar('addr',0);;" /><br />
-			</div>
-
+	<div class="container">
+		<form style="width: 100%;margin:0;" id="sliders-container">
 			<div class="dmx-container">
-				<div id="slider-container">
-				
-				</div>
-
+				<div id="slider-container"></div>
 				<div>
 					<div>
 						<label for="auto-apply-checkbox" class="textbox-label">Auto apply</label>
@@ -65,14 +70,11 @@
 					<button type="button" onclick="sendCurrentData()">Apply</button>
 				</div>
 			</div>
-			
-			
-
 		</form>
-	</div>
 
-	<div id="pad-container">
-
+		<div id="pads-container">
+			<div id="pad-container"></div>   
+		</div>    
 	</div>
 
 	<script src="/assets/js/slider-generator.js"></script>
