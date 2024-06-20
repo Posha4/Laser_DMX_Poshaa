@@ -135,7 +135,7 @@ void setup()
         request->send(SPIFFS, "/index.html", "text/html"); 
     });
 
-    server.on("/assets/*", HTTP_GET, [](AsyncWebServerRequest *request){
+    server.on("/*", HTTP_GET, [](AsyncWebServerRequest *request){
         String path = request->url();
         Serial.println("Requested URL: " + path);
 
