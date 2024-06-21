@@ -29,25 +29,28 @@
     </template>
 
 	<template id="pad-template">
-        <div class="pad">
-			<div class="pad-body">
-
-			</div>
-			<div class="pad-footer">
-				<span class="pad-name"></span>
-
-				<div class="pad-actions">
-					<button name="deletePreset" type="button">
-						<img src="/assets/img/delete.svg" width="20" height="20" alt="Delete" />
-					</button>
+		<div class="pad-container">
+			<div class="pad">
+				<div class="pad-body">
 	
-					<button name="changeColorPreset" type="button">
-						<img src="/assets/img/palette.svg" width="20" height="20" alt="Change color" />
-					</button>
 				</div>
-				
+				<div class="pad-footer">
+					<span class="pad-name"></span>
+	
+					<div class="pad-actions">
+						<button name="deletePreset" type="button">
+							<img src="/assets/img/delete.svg" width="20" height="20" alt="Delete" />
+						</button>
+		
+						<button name="changeColorPreset" type="button">
+							<img src="/assets/img/palette.svg" width="20" height="20" alt="Change color" />
+						</button>
+					</div>
+					
+				</div>
 			</div>
 		</div>
+        
     </template>
 
 	<h2 class="title">Laser DMX Controller <span><div id="ws-status"></div></span></h2>
@@ -76,6 +79,7 @@
 		</form>
 
 		<div id="pads-container">
+			<button type="button" onclick="toggleEditPad()">Toggle edit pads</button>
 			<div id="pad-container"></div>   
 		</div>    
 	</div>

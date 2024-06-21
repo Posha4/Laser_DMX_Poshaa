@@ -96,5 +96,22 @@ function initPads(json){
     jsonParsed.forEach(pad => {
         _createPad(pad.id, pad.values, pad.name, pad.color);
     });
-    
+    toggleEditPad(true);
+}
+
+var showEditPad = false;
+function toggleEditPad(keep = false){
+
+    if((showEditPad && !keep) || (keep && !showEditPad)){
+        document.querySelectorAll('.pad .pad-actions').forEach(element => {
+            element.style.display = 'none';
+        })
+    } else {
+        document.querySelectorAll('.pad .pad-actions').forEach(element => {
+            element.style.display = 'flex';
+        })
+    }
+
+    if(!keep)
+        showEditPad = !showEditPad;
 }
