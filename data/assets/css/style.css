@@ -51,6 +51,7 @@ body {
 
 #pads-container, #storage-container {
   display: none;
+  width: 100%;
 }
 
 .container {

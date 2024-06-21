@@ -1,13 +1,21 @@
-@media (max-width: 801px) {
-    .pad-container {
-        width: 50%;
-    }
-}
-
 .pad-container {
     padding: 8px;
     box-sizing: border-box;
     aspect-ratio: 1 / 1;
+    width: 20%;
+    max-width: 300px;
+}
+
+@media (max-width: 750px) {
+    .pad-container {
+        width: 33%;
+    }
+}
+
+@media (max-width: 550px) {
+    .pad-container {
+        width: 50%;
+    }
 }
 
 .pad {
