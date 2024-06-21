@@ -1,0 +1,70 @@
+[
+    {
+        "id": "iTKJxA47wtWn6hyDQBC4",
+        "values": [
+            0,
+            0,
+            "197",
+            "58",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "name": "Preset 1",
+        "color": "MediumSpringGreen"
+    },
+    {
+        "id": "FjP7CCBqBbOhtgB1kaMA",
+        "values": [
+            0,
+            0,
+            "197",
+            "58",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "name": "Preset 2",
+        "color": "DarkOliveGreen"
+    },
+    {
+        "id": "RWSGVLo5cFc42hl9qmDf",
+        "values": [
+            0,
+            0,
+            "197",
+            "58",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "name": "Preset 3",
+        "color": "Orange"
+    },
+    {
+        "id": "XVyKgmgqbJSqV9hJr3r6",
+        "values": [
+            0,
+            0,
+            "197",
+            "58",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "name": "Preset 4",
+        "color": "PaleTurquoise"
+    }
+]
