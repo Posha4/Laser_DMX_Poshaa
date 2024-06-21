@@ -42,13 +42,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 #include <ESPAsyncWebServer.h>
 #include <FS.h>
 
-// WiFi network settings
-const char *ssid = "Scotty";
-const char *password = "Tatatoum12345";
-
 DMXESPSerial dmx;
 
-ESP8266WiFiMulti WiFiMulti;
+ESP8266WiFiMulti wiFiMulti;
 AsyncWebServer server(80);
 WebSocketsServer webSocket = WebSocketsServer(81);
 
@@ -170,13 +166,15 @@ void setup()
     // connect to WiFi
     WiFi.hostname("rgbdmx");
     WiFi.mode(WIFI_STA);
-    WiFi.begin(ssid, password);
-    // wait for connection to be established
-    while (WiFi.waitForConnectResult() != WL_CONNECTED)
-    {
-        WiFi.begin(ssid, password);
-        Serial.println("WiFi connection failed, retrying.");
-        delay(500);
+
+    wiFiMulti.addAP("Scotty", "Tatatoum12345");
+    wiFiMulti.addAP("The Kave", "Tatatoum");
+
+    Serial.println("Connecting ...");
+    int i = 0;
+    while (wiFiMulti.run() != WL_CONNECTED) {
+        delay(1000);
+        Serial.print(++i); Serial.print(' ');
     }
 
     // start webSocket server
@@ -186,6 +184,7 @@ void setup()
     if (MDNS.begin("rgbdmx"))
     {
         Serial.println("MDNS responder started");
+        MDNS.addService("http", "tcp", 80);
     }
 
     server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
@@ -220,6 +219,6 @@ void setup()
 void loop()
 {
     webSocket.loop();
-    // server.handleClient();
     dmx.update();
+    MDNS.update();
 }

@@ -160,20 +160,32 @@ var slidersData = [
         type: 'radio',
         options : [
             {
-                value: 0,
+                value: 30,
+                name: 'Multicolor rainbow'
+            },
+            {
+                value: 80,
                 name: 'Red'
             },
             {
-                value: 1,
+                value: 100,
                 name: 'Green'
             },
             {
-                value: 2,
+                value: 130,
                 name: 'Blue'
             },
             {
-                value: 3,
-                name: 'White'
+                value: 170,
+                name: 'Yellow / Green'
+            },
+            {
+                value: 200,
+                name: 'Violet'
+            },
+            {
+                value: 230,
+                name: 'Light blue'
             }
         ]
     }
