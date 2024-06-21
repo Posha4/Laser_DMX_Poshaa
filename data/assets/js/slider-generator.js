@@ -17,6 +17,17 @@ for(var i = 0; i < slidersData.length; i++) {
         clone.querySelector("input[type='number']").setAttribute('id', `${slidersData[i].id}_in`);
         clone.querySelector("input[type='number']").setAttribute('onchange', `onSliderChange('${slidersData[i].id}');`);
         clone.querySelector("input[type='number']").setAttribute('oninput', `this.form.${slidersData[i].id}.value=this.value`);
+
+        if(slidersData[i].options){
+            if(slidersData[i].options.min)
+                clone.querySelector("input[type='range']").setAttribute('min', slidersData[i].options.min);
+            if(slidersData[i].options.max)
+                clone.querySelector("input[type='range']").setAttribute('max', slidersData[i].options.max);
+            if(slidersData[i].options.value)
+                clone.querySelector("input[type='range']").setAttribute('value', slidersData[i].options.value);
+            if(slidersData[i].options.step)
+                clone.querySelector("input[type='range']").setAttribute('step', slidersData[i].options.step);
+        }
     
         if(slidersData[i].visible == false){
             clone.querySelector('.slider-input-container').style.display = 'none';
