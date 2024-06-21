@@ -1,3 +1,10 @@
+#pad-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 24px;
+}
+
 .pad-container {
   padding: 8px;
   box-sizing: border-box;

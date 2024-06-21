@@ -67,3 +67,24 @@ for(var i = 0; i < slidersData.length; i++) {
     }
    
 }
+
+
+function changeSliderOrientation(){
+    var width = window.innerWidth;
+    if(width < 1000){
+        this.document.querySelectorAll('.slider[orient-dynamic=true]').forEach(slider => {
+            slider.setAttribute('orient', 'horizontal')
+        })
+    } else{
+        this.document.querySelectorAll('.slider[orient-dynamic=true]').forEach(slider => {
+            slider.setAttribute('orient', 'vertical')
+        })
+    }
+}
+
+changeSliderOrientation();
+
+window.addEventListener('resize', function(event) {
+   changeSliderOrientation();
+}, true);
+

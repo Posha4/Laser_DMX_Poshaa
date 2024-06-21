@@ -61,54 +61,10 @@ body {
   padding: 16px;
 }
 
-input[type=range][orient=vertical] {
-  writing-mode: vertical-lr;
-  direction: rtl;
-  width: 16px;
-  vertical-align: bottom;
-  margin: 8px 0;
-}
-
 .dmx-container {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-#slider-container {
-  display: flex;
-  justify-content: center;
-  align-items: start;
-}
-
-.slider-input-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 0 8px;
-}
-
-.slider-name {
-  font-weight: bold;
-}
-
-.slider-radio-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 12px;
-}
-
-.slider-radio-wrapper {
-  margin-right: 8px;
-}
-
-#pad-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 24px;
 }
 
 button {
