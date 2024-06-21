@@ -108,7 +108,13 @@ var slidersData = [
         value: 0,
         name: 'Figs',
         visible: true,
-        type: 'range'
+        type: 'range',
+        options: {
+            min: 5,
+            max: 255,
+            value: 0,
+            step: 8
+        }
     },
     {
         id: 'chan3',
