@@ -89,3 +89,11 @@ input[type=radio] {
   height: 20px;
   cursor: pointer;
 }
+
+.button-reconnect {
+  background: none;
+}
+
+.button-reconnect:hover {
+  background: none;
+}
