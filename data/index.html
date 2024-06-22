@@ -82,11 +82,22 @@
 			<button type="button" onclick="toggleEditPad()">Toggle edit pads</button>
 			<div id="pad-container"></div>   
 		</div>    
+
+		<div id="storage-container">
+			<div>
+				<a href="data.json" target="_blank" download="data" class="btn">Export data</a>
+			</div>
+			<div style="margin-top: 30px;">
+				<input type="file" id="file-import-data" />
+				<button onclick="importData()">Import data</button>
+			</div>
+		</div>    
 	</div>
 
 	<script src="/assets/js/slider-generator.js"></script>
 	<script src="/assets/js/pad.js"></script>
 	<script src="/assets/js/data.js"></script>
+	<script src="/assets/js/storage.js"></script>
 </body>
 
 </html>

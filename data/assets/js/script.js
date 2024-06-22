@@ -36,10 +36,17 @@ function navigate(page){
         case 'sliders':
             document.getElementById('sliders-container').style.display = 'block';
             document.getElementById('pads-container').style.display = 'none';
+            document.getElementById('storage-container').style.display = 'none';
             break;
         case 'pads':
             document.getElementById('sliders-container').style.display = 'none';
             document.getElementById('pads-container').style.display = 'block';
+            document.getElementById('storage-container').style.display = 'none';
+            break;
+        case 'storage':
+            document.getElementById('sliders-container').style.display = 'none';
+            document.getElementById('pads-container').style.display = 'none';
+            document.getElementById('storage-container').style.display = 'block';
             break;
         default:
             console.log('Invalid page');
