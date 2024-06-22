@@ -1,6 +1,10 @@
 var connection;
 
 window.onload = function() {
+    initSocket();
+};
+
+function initSocket() {
     connection = new WebSocket('ws://' + location.hostname + ':81/', ['arduino']);
     connection.onopen = function () {
         document.getElementById('ws-status').style = 'background-color: green;';
@@ -29,7 +33,12 @@ window.onload = function() {
         console.log('WebSocket connection closed');
         document.getElementById('ws-status').style = 'background-color: red;';
     };
-};
+}
+
+function reconnect() {
+    if(connection.readyState === WebSocket.CLOSED || connection.readyState === WebSocket.CLOSING)
+        initSocket();
+}
 
 function navigate(page){
     switch(page){
