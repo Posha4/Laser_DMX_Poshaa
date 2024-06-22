@@ -82,3 +82,10 @@ button, .btn {
 button:hover {
   background: darkorange;
 }
+
+input[type=radio] {
+  border: 0px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
