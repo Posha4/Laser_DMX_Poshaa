@@ -1,70 +1,189 @@
 [
     {
-        "id": "iTKJxA47wtWn6hyDQBC4",
+        "id": "GNmtgztc0GcLiDrwNgYL",
         "values": [
+            1,
+            "255",
+            "189",
             0,
-            0,
-            "197",
-            "58",
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
+            "0",
+            "0",
+            "154",
+            "192",
+            "0",
+            "230"
         ],
-        "name": "Preset 1",
-        "color": "MediumSpringGreen"
+        "name": "Blue Cross",
+        "color": "MediumAquaMarine"
     },
     {
-        "id": "FjP7CCBqBbOhtgB1kaMA",
+        "id": "JvEPaQbF71WWIWGvdWvK",
         "values": [
+            1,
+            "255",
+            "157",
             0,
-            0,
-            "197",
-            "58",
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
+            "0",
+            "0",
+            "154",
+            "192",
+            "0",
+            "100"
         ],
-        "name": "Preset 2",
-        "color": "DarkOliveGreen"
+        "name": "Green horizontal scan",
+        "color": "Tan"
     },
     {
-        "id": "RWSGVLo5cFc42hl9qmDf",
+        "id": "NzE15tvVqCCFrUyrHWyg",
         "values": [
+            1,
+            "255",
+            "165",
+            0,
+            "0",
+            "162",
             0,
             0,
-            "197",
-            "58",
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
+            "131",
+            "200"
         ],
-        "name": "Preset 3",
-        "color": "Orange"
+        "name": "purple scan vertical",
+        "color": "Brown"
     },
     {
-        "id": "XVyKgmgqbJSqV9hJr3r6",
+        "id": "NUcTAI6sKJGzEdyvM4Hi",
         "values": [
+            1,
+            "0",
+            "165",
+            0,
+            "0",
+            "162",
             0,
             0,
-            "197",
-            "58",
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
+            "131",
+            "200"
         ],
-        "name": "Preset 4",
-        "color": "PaleTurquoise"
+        "name": "blackout",
+        "color": "Gray"
+    },
+    {
+        "id": "TnMi9D71rwWoJGftRUtA",
+        "values": [
+            1,
+            "255",
+            "5",
+            "117",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "30"
+        ],
+        "name": "beam",
+        "color": "CadetBlue"
+    },
+    {
+        "id": "ptj44QhMVKVf4djitjj8",
+        "values": [
+            1,
+            "255",
+            "181",
+            "0",
+            "143",
+            "0",
+            0,
+            0,
+            "150",
+            "130"
+        ],
+        "name": "blue double scan",
+        "color": "PaleGreen"
+    },
+    {
+        "id": "tWEKvqJP6iVDkkFnU5Bt",
+        "values": [
+            1,
+            "255",
+            "77",
+            0,
+            0,
+            0,
+            "156",
+            "0",
+            "0",
+            "200"
+        ],
+        "name": "purple cross",
+        "color": "Fuchsia"
+    },
+    {
+        "id": "MLpZaSbotzReDTGbQNyw",
+        "values": [
+            1,
+            "255",
+            "229",
+            0,
+            0,
+            0,
+            "156",
+            "0",
+            "0",
+            "30"
+        ],
+        "name": "intro rotating cube",
+        "color": "DodgerBlue"
+    },
+    {
+        "id": "TrJZuTw46PxsntIKk3Wq",
+        "values": [
+            1,
+            "255",
+            "253",
+            "0",
+            0,
+            0,
+            "199",
+            "136",
+            "0",
+            "170"
+        ],
+        "name": "dots left right",
+        "color": "LightSlateGrey"
+    },
+    {
+        "id": "lkFrAH2U2dpm45xFuuTy",
+        "values": [
+            1,
+            "255",
+            "157",
+            "226",
+            0,
+            0,
+            "0",
+            "0",
+            "57",
+            "170"
+        ],
+        "name": "orange line",
+        "color": "LightYellow"
+    },
+    {
+        "id": "Y7M5jWCWdiWaGleF3Muc",
+        "values": [
+            1,
+            "255",
+            "93",
+            0,
+            "0",
+            "132",
+            0,
+            "0",
+            0,
+            "170"
+        ],
+        "name": "intro yellow",
+        "color": "LightGrey"
     }
 ]

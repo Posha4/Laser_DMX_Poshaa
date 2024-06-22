@@ -98,7 +98,7 @@ function sendVars(values) {
 var slidersData = [
     {
         id: 'addr',
-        value: 0,
+        value: 1,
         name: 'Address',
         visible: false,
         type: 'range'
