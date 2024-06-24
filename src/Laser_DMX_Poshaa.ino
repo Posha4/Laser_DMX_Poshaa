@@ -95,8 +95,6 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t length)
 
             if (payload[0] == '!'){
 
-                int jsonLength = length-1;
-
                 Serial.println("====== Writing to SPIFFS file =========");
 
                 File f = SPIFFS.open("/data.json", "w");
