@@ -206,7 +206,7 @@ void setup()
     MDNS.addService("http", "tcp", 80);
     MDNS.addService("ws", "tcp", 81);
 
-    dmx.init(9); // initialize with bus length
+    dmx.init(10); // initialize with bus length
 
     Serial.print("IP address: ");
     Serial.println(WiFi.localIP());
