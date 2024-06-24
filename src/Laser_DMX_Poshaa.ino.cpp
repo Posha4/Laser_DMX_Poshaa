@@ -1,35 +1,7 @@
-/* This example joins two useful libraries for ESP8266 WiFi Module
- * Websockets library for interfacing from either web interface or
- * some external application and DMX library for controlling
- * devices on a DMX bus.
- *
- * Install these libraries:
- * https://github.com/Links2004/arduinoWebSockets
- * https://github.com/Rickgg/ESP-Dmx
- *
- * Web interface allow one to set the channel and control an RGB
- * light, assuming channels for cors follow one after eachother
- *
- * How to use:
- * 1) Change WiFi settings accordingly to connect to your network
- * 2) Connect an RS485 driver chip to GPIO02( D4 on Nodemcu 1.0)
- * 3) Check out the serial output for IP or
- * visit http://rgbdmx.local if your device supports mDNS and
- * you are in the same local network
-
-Copyright Institute IRNAS Rače 2016 - info@irnas.eu
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
-
+# 1 "C:\\Users\\cleme\\AppData\\Local\\Temp\\tmpr0fksff5"
+#include <Arduino.h>
+# 1 "C:/Users/cleme/Documents/PlatformIO/Projects/240618-190049-esp32dev/src/Laser_DMX_Poshaa.ino"
+# 33 "C:/Users/cleme/Documents/PlatformIO/Projects/240618-190049-esp32dev/src/Laser_DMX_Poshaa.ino"
 #include <Arduino.h>
 #include <ESPDMX.h>
 
@@ -47,7 +19,11 @@ DMXESPSerial dmx;
 ESP8266WiFiMulti wiFiMulti;
 AsyncWebServer server(80);
 WebSocketsServer webSocket = WebSocketsServer(81);
-
+void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t length);
+void sendConfig(uint8_t num);
+void setup();
+void loop();
+#line 51 "C:/Users/cleme/Documents/PlatformIO/Projects/240618-190049-esp32dev/src/Laser_DMX_Poshaa.ino"
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t length)
 {
     switch (type) {
@@ -57,17 +33,17 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t length)
             break;
         case WStype_CONNECTED:
             Serial.println("Client connected!");
-            // send message to client
+
             webSocket.sendTXT(num, "!Connected");
             sendConfig(num);
 
             break;
         case WStype_TEXT:
         {
-            // # is the start for this data
+
             if (payload[0] == '#')
             {
-                // data received is comma separated, thats why we do pEnd+1 to start next value
+
                 char *pEnd;
                 uint32_t address = strtol((const char *)&payload[1], &pEnd, 16);
                 uint32_t chan1 = strtol((const char *)pEnd + 1, &pEnd, 16);
@@ -80,7 +56,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t length)
                 uint32_t chan8 = strtol((const char *)pEnd + 1, &pEnd, 16);
                 uint32_t chan9 = strtol((const char *)pEnd + 1, &pEnd, 16);
 
-                // write to DMX bus
+
                 dmx.write(address, chan1);
                 dmx.write(address + 1, chan2);
                 dmx.write(address + 2, chan3);
@@ -116,17 +92,17 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t length)
                 Serial.println("");
                 f.close();
 
-                //transform the payload to a request for all clients
+
                 payload[0] = '?';
                 webSocket.broadcastTXT(payload, length);
             }
 
             if (payload[0] == '?'){
-               sendConfig(num);  
+               sendConfig(num);
             }
             break;
         }
-       
+
     }
 }
 
@@ -141,11 +117,11 @@ void sendConfig(uint8_t num){
 
     String json = f.readString();
     Serial.print("?");
-    Serial.println(json);   
+    Serial.println(json);
 
     f.close();
 
-    String resp =  String("?" + json);
+    String resp = String("?" + json);
     webSocket.sendTXT(num, resp);
 }
 
@@ -154,14 +130,14 @@ void setup()
     Serial.begin(115200);
     Serial.println();
 
-    // Initialize SPIFFS
+
     if (!SPIFFS.begin())
     {
         Serial.println("An Error has occurred while mounting SPIFFS");
         return;
     }
 
-    // connect to WiFi
+
     WiFi.hostname("rgbdmx");
     WiFi.mode(WIFI_STA);
 
@@ -176,7 +152,7 @@ void setup()
         Serial.print(++i); Serial.print(' ');
     }
 
-    // start webSocket server
+
     webSocket.begin();
     webSocket.onEvent(webSocketEvent);
 
@@ -188,7 +164,7 @@ void setup()
 
     server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
         Serial.println("GET /");
-        request->send(SPIFFS, "/index.html", "text/html"); 
+        request->send(SPIFFS, "/index.html", "text/html");
     });
 
     server.on("/*", HTTP_GET, [](AsyncWebServerRequest *request){
@@ -206,7 +182,7 @@ void setup()
     MDNS.addService("http", "tcp", 80);
     MDNS.addService("ws", "tcp", 81);
 
-    dmx.init(9); // initialize with bus length
+    dmx.init(9);
 
     Serial.print("IP address: ");
     Serial.println(WiFi.localIP());
