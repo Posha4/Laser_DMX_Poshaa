@@ -91,6 +91,8 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t length)
                 dmx.write(address + 7, chan8);
                 dmx.write(address + 8, chan9);
                 dmx.update();
+
+                Serial.println("DMX data received");
             }
 
             if (payload[0] == '!'){
