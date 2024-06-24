@@ -15,8 +15,8 @@ function savePreset(){
 
 function createPad(preset){
 
-    if(pads.length >= 24){
-        alert('Max number of presets reached (24).');
+    if(pads.length >= 30){
+        alert('Max number of presets reached (30).');
         return;
     }
 
