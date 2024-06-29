@@ -168,6 +168,7 @@ void setup()
     wiFiMulti.addAP("Scotty", "Tatatoum12345");
     wiFiMulti.addAP("The Kave", "Tatatoum");
     wiFiMulti.addAP("Bbox-8292DA0D","EF3ACE1F7D37FDA35556313D114564");
+    wiFiMulti.addAP("TataOP","Tatatoum");
 
     Serial.println("Connecting ...");
     int i = 0;
