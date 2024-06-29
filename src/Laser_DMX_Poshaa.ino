@@ -44,9 +44,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.*/
 
 DMXESPSerial dmx;
 
-ESP8266WiFiMulti wiFiMulti;
 AsyncWebServer server(80);
 WebSocketsServer webSocket = WebSocketsServer(81);
+
+const char *ssid = "RGBDMX";
+const char *password = "Tatatoum";
+
+IPAddress local_IP(192,168,4,1);
+IPAddress gateway(192,168,4,9);
+IPAddress subnet(255,255,255,0);
 
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t length)
 {
@@ -163,28 +169,19 @@ void setup()
 
     // connect to WiFi
     WiFi.hostname("rgbdmx");
-    WiFi.mode(WIFI_STA);
+    
+    Serial.print("Setting soft-AP configuration ... ");
+    Serial.println(WiFi.softAPConfig(local_IP, gateway, subnet) ? "Ready" : "Failed!");
 
-    wiFiMulti.addAP("Scotty", "Tatatoum12345");
-    wiFiMulti.addAP("The Kave", "Tatatoum");
-    wiFiMulti.addAP("Bbox-8292DA0D","EF3ACE1F7D37FDA35556313D114564");
-
-    Serial.println("Connecting ...");
-    int i = 0;
-    while (wiFiMulti.run() != WL_CONNECTED) {
-        delay(1000);
-        Serial.print(++i); Serial.print(' ');
-    }
+    Serial.print("Setting soft-AP ... ");
+    Serial.println(WiFi.softAP(ssid,password) ? "Ready" : "Failed!");
+    
+    Serial.print("Soft-AP IP address = ");
+    Serial.println(WiFi.softAPIP());
 
     // start webSocket server
     webSocket.begin();
     webSocket.onEvent(webSocketEvent);
-
-    if (MDNS.begin("rgbdmx"))
-    {
-        Serial.println("MDNS responder started");
-        MDNS.addService("http", "tcp", 80);
-    }
 
     server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
         Serial.println("GET /");
@@ -203,8 +200,6 @@ void setup()
     });
 
     server.begin();
-    MDNS.addService("http", "tcp", 80);
-    MDNS.addService("ws", "tcp", 81);
 
     dmx.init(10); // initialize with bus length
 
@@ -219,5 +214,4 @@ void loop()
 {
     webSocket.loop();
     dmx.update();
-    MDNS.update();
 }
