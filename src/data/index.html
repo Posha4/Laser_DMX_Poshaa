@@ -1,0 +1,103 @@
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="/assets/css/pad.css" />
+	<link rel="stylesheet" type="text/css" href="/assets/css/slider.css" />
+	<script src="/assets/js/script.js"></script>
+	<title>Laser DMX Controller</title>
+</head>
+
+<body>
+
+	<template id="slider-template">
+        <div class="slider-input-container">
+			<span class="slider-name"></span>
+			<div class="slidercontainer">
+				<input type="range" min="0" max="255" value="0" step="1" class="slider" orient-dynamic="true">
+			</div>
+			<input type="number" min="0" max="255" step="1" value="0" />
+		</div>
+    </template>
+
+	<template id="radio-slider-template">
+        <div class="slider-input-container">
+			<span class="slider-name"></span>
+			<div class="slidercontainer"></div>
+		</div>
+    </template>
+
+	<template id="pad-template">
+		<div class="pad-container">
+			<div class="pad">
+				<div class="pad-body">
+	
+				</div>
+				<div class="pad-footer">
+					<span class="pad-name"></span>
+	
+					<div class="pad-actions">
+						<button name="deletePreset" type="button">
+							<img src="/assets/img/delete.svg" width="20" height="20" alt="Delete" />
+						</button>
+		
+						<button name="changeColorPreset" type="button">
+							<img src="/assets/img/palette.svg" width="20" height="20" alt="Change color" />
+						</button>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+        
+    </template>
+
+	<h2 class="title">Laser DMX Controller <button onclick="reconnect()" class="button-reconnect"><div id="ws-status"></div></but></h2>
+
+	<div class="navigation">
+		<button onclick="navigate('sliders')">Sliders</button>
+		<button onclick="navigate('pads')" href="/pads.html">Pads</button>
+		<button onclick="navigate('storage')" href="#">Storage</button>
+	</div>
+
+	<div class="container">
+		<form style="width: 100%;margin:0;" id="sliders-container">
+			<div class="dmx-container">
+				<div id="slider-container"></div>
+			</div>
+			<div style="margin-top: 24px;display: flex;justify-content: space-around;">
+				<button type="button" onclick="savePreset()">Save Preset</button>
+				<div style="display: flex; align-items: center;">
+					<div style="margin-right: 8px;">
+						<label for="auto-apply-checkbox" class="textbox-label">Auto apply</label>
+						<input id="auto-apply-checkbox" name="auto-apply-checkbox" type="checkbox">
+					</div>
+					<button type="button" onclick="sendCurrentData()">Apply</button>
+				</div>
+			</div>
+		</form>
+
+		<div id="pads-container">
+			<button type="button" onclick="toggleEditPad()">Toggle edit pads</button>
+			<div id="pad-container"></div>   
+		</div>    
+
+		<div id="storage-container">
+			<div>
+				<a href="data.json" target="_blank" download="data" class="btn">Export data</a>
+			</div>
+			<div style="margin-top: 30px;">
+				<input type="file" id="file-import-data" />
+				<button onclick="importData()">Import data</button>
+			</div>
+		</div>    
+	</div>
+
+	<script src="/assets/js/slider-generator.js"></script>
+	<script src="/assets/js/pad.js"></script>
+	<script src="/assets/js/data.js"></script>
+	<script src="/assets/js/storage.js"></script>
+</body>
+
+</html>
